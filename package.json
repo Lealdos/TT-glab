@@ -1,19 +1,19 @@
 {
-  "name": "glab-servicio-reserva",
-  "version": "1.0.0",
-  "description": "prueba tecnica Glab col",
-  "main": "index.js",
-  "scripts": {
-    "test": "test.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Lealdos/TT-glab.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Lealdos/TT-glab/issues"
-  },
-  "homepage": "https://github.com/Lealdos/TT-glab#readme"
+    "name": "glab-servicio-reserva",
+    "version": "1.0.0",
+    "description": "prueba técnica Glab col",
+    "main": "index.js",
+    "scripts": {
+        "test": "test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Lealdos/TT-glab.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Lealdos/TT-glab/issues"
+    },
+    "homepage": "https://github.com/Lealdos/TT-glab#readme"
 }
