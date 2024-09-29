@@ -1,11 +1,10 @@
-// src/pages/Login.tsx
 import React from 'react';
 import { TextField, Button, Box, Typography } from '@mui/material';
-import { useLoginViewModel } from '../viewModels/useLoginViewModel';
+import { useRegisterViewModel } from '../viewModels/useRegisterViewModel';
 
-export const Login: React.FC = () => {
-    const { register, handleSubmit, errors, authError, onSubmit } =
-        useLoginViewModel();
+export const Register: React.FC = () => {
+    const { register, handleSubmit, errors, registerError, onSubmit } =
+        useRegisterViewModel();
 
     return (
         <Box
@@ -17,21 +16,34 @@ export const Login: React.FC = () => {
             }}
         >
             <Typography variant='h4' component='h1' gutterBottom>
-                Login
+                Register
             </Typography>
-            {authError && (
+            {registerError && (
                 <Typography variant='body1' color='error' gutterBottom>
-                    {authError}
+                    {registerError}
                 </Typography>
             )}
             <Box
                 component='form'
                 onSubmit={handleSubmit(onSubmit)}
                 sx={{ width: '300px' }}
-                bgcolor={'gray'}
-                p={2}
-                borderRadius={5}
             >
+                <TextField
+                    label='First Name'
+                    fullWidth
+                    margin='normal'
+                    {...register('firstName')}
+                    error={!!errors.firstName}
+                    helperText={errors.firstName?.message}
+                />
+                <TextField
+                    label='Last Name'
+                    fullWidth
+                    margin='normal'
+                    {...register('lastName')}
+                    error={!!errors.lastName}
+                    helperText={errors.lastName?.message}
+                />
                 <TextField
                     label='Email'
                     fullWidth
@@ -39,7 +51,6 @@ export const Login: React.FC = () => {
                     {...register('email')}
                     error={!!errors.email}
                     helperText={errors.email?.message}
-                    variant='outlined'
                 />
                 <TextField
                     label='Password'
@@ -50,13 +61,22 @@ export const Login: React.FC = () => {
                     error={!!errors.password}
                     helperText={errors.password?.message}
                 />
+                <TextField
+                    label='Confirm Password'
+                    type='password'
+                    fullWidth
+                    margin='normal'
+                    {...register('confirmPassword')}
+                    error={!!errors.confirmPassword}
+                    helperText={errors.confirmPassword?.message}
+                />
                 <Button
                     type='submit'
                     variant='contained'
                     fullWidth
                     sx={{ mt: 2 }}
                 >
-                    Login
+                    Register
                 </Button>
             </Box>
         </Box>

@@ -3,10 +3,12 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { loginService } from '../services/AuthService';
+import { useNavigate } from 'react-router-dom';
 
 const loginSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(6),
+    email: z.string().email('Invalid email address'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
 type LoginFormInputs = z.infer<typeof loginSchema>;
@@ -20,19 +22,16 @@ export const useLoginViewModel = () => {
         resolver: zodResolver(loginSchema),
     });
     const [authError, setAuthError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
-    const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
-        // Lógica de autenticación
-        console.log('Login data:', data);
-        // Simular un error de autenticación
-        if (
-            data.email !== 'admin@example.com' ||
-            data.password !== 'password123'
-        ) {
-            setAuthError('Invalid email or password');
-        } else {
+    const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+        try {
+            await loginService(data);
             setAuthError(null);
-            // Redirigir al dashboard o realizar otra acción
+            navigate('/dashboard');
+        } catch (error: unknown) {
+            console.error(error);
+            setAuthError('Invalid email or password');
         }
     };
 
