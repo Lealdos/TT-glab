@@ -1,3 +1,11 @@
 {
-    "recommendations": []
+    "recommendations": [
+        "Codeium.codeium",
+        "ms-vscode.vscode-typescript-language-features",
+        "PKief.material-icon-theme",
+        "ms-azuretools.vscode-docker",
+        "Prisma.prisma",
+        "mechatroner.rainbow-csv",
+        "rangav.vscode-thunder-client"
+    ]
 }
