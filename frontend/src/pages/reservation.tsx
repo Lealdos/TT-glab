@@ -1,4 +1,3 @@
-// src/pages/Reservation.tsx
 import React from 'react';
 import {
     Box,
@@ -37,7 +36,22 @@ export const Reservation: React.FC = () => {
             <Box
                 component='form'
                 onSubmit={handleSubmit(onSubmit)}
-                sx={{ width: '500px' }}
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    mt: 8,
+                    backgroundColor: 'grey',
+                    color: 'white',
+                    fontSize: 20,
+                    fontWeight: 500,
+                    textAlign: 'center',
+                    padding: 2,
+                    borderRadius: 5,
+                    width: '500px',
+                    margin: 'auto',
+                    boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+                }}
             >
                 <TextField
                     label='First Name'
@@ -115,6 +129,9 @@ export const Reservation: React.FC = () => {
                         <MenuItem value='Birthday'>Birthday</MenuItem>
                         <MenuItem value='Special Occasion'>
                             Special Occasion
+                        </MenuItem>
+                        <MenuItem value='Dinner parties'>
+                            Dinner parties
                         </MenuItem>
                     </Select>
                     <Typography variant='body2' color='error'>

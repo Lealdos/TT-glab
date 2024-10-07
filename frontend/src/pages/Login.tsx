@@ -1,4 +1,3 @@
-// src/pages/Login.tsx
 import React from 'react';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import { useLoginViewModel } from '../viewModels/useLoginViewModel';
@@ -14,6 +13,16 @@ export const Login: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 mt: 8,
+                backgroundColor: 'grey',
+                color: 'white',
+                fontSize: 20,
+                fontWeight: 500,
+                textAlign: 'center',
+                padding: 2,
+                borderRadius: 5,
+                width: '500px',
+                margin: 'auto',
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
             }}
         >
             <Typography variant='h4' component='h1' gutterBottom>

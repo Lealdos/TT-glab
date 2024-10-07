@@ -1,29 +1,32 @@
-// src/App.tsx
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Home } from './pages/Home.tsx';
-import { Login } from './pages/Login.tsx';
-import { Dashboard } from './pages/Dashboard.tsx';
-import { Register } from './pages/Register.tsx';
-import { PrivateRoute } from './routes/PrivateRoute';
+
+import { Router } from './routes';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { NavBar } from './components/NavBar';
+import { BrowserRouter } from 'react-router-dom';
+
 const App: React.FC = () => {
     return (
-        <Router>
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route
-                    path='/dashboard'
-                    element={
-                        <PrivateRoute>
-                            <Dashboard />
-                        </PrivateRoute>
-                    }
-                />
-            </Routes>
-        </Router>
+        <div
+            style={{
+                backgroundColor: '#242424',
+                height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'auto',
+            }}
+        >
+            <BrowserRouter>
+                <LocalizationProvider dateAdapter={AdapterMoment}>
+                    <NavBar />
+                    <Router />
+                </LocalizationProvider>
+            </BrowserRouter>
+        </div>
     );
 };
 
