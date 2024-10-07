@@ -1,4 +1,3 @@
-// prisma/seed.ts
 import { PrismaClient } from '@prisma/client';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -26,6 +25,8 @@ async function readCSV(filePath: string): Promise<any[]> {
 }
 
 async function main() {
+  await prisma.reservation.deleteMany();
+  console.log('All reservations deleted');
   await prisma.user.deleteMany();
   console.log('All users deleted');
 
@@ -36,6 +37,7 @@ async function main() {
     users.map((user) =>
       prisma.user.create({
         data: {
+          id: user.id || undefined,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
@@ -45,12 +47,7 @@ async function main() {
       }),
     ),
   );
-
   console.log(`Usuarios creados: ${userRecords.length}`);
-
-  // Clearing reservations before batch insertion
-  await prisma.reservation.deleteMany();
-  console.log('All reservations deleted');
 
   const reservationsFilePath = path.join(
     __dirname,
@@ -60,16 +57,20 @@ async function main() {
   const reservations = await readCSV(reservationsFilePath);
 
   const reservationPromises = reservations.map(async (reservation) => {
-    const userId = parseInt(reservation.userId, 10);
+    const user = userRecords.find(
+      (u) => u.email === reservation.email || u.id === reservation.userId,
+    );
 
-    // Making sure that the user exists for the reservation
-    const user = userRecords.find((u) => u.id === userId);
     if (!user) {
-      console.log(
-        `No user found for reservation: ${reservation.firstName} ${reservation.lastName}`,
+      console.error(
+        `Usuario no encontrado para la reserva: ${reservation.email} (userId: ${reservation.userId})`,
       );
-      return;
+      return null;
     }
+
+    console.log(
+      `Creando reserva para el usuario con ID: ${user.id} (${user.email})`,
+    );
 
     return prisma.reservation.create({
       data: {
@@ -90,7 +91,7 @@ async function main() {
         numberOfPeople: parseInt(reservation.numberOfPeople, 10),
         description: reservation.description,
         user: {
-          connect: { id: user.id },
+          connect: { id: user.id }, // Conectar la reserva al usuario encontrado
         },
       },
     });
