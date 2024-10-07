@@ -3,8 +3,15 @@
     "version": "1.0.0",
     "description": "prueba técnica Glab col",
     "main": "index.js",
+    "workspaces": [
+        "backend",
+        "frontend"
+    ],
     "scripts": {
-        "test": "test.js"
+        "test": "test.js",
+        "dev": "concurrently \"npm run start:dev --workspace=backend \" \"npm run dev --workspace=frontend\"",
+        "start:backend": "npm run dev --workspace=backend ",
+        "start:frontend": "npm run dev --workspace=frontend"
     },
     "repository": {
         "type": "git",
@@ -15,5 +22,17 @@
     "bugs": {
         "url": "https://github.com/Lealdos/TT-glab/issues"
     },
-    "homepage": "https://github.com/Lealdos/TT-glab#readme"
+    "homepage": "https://github.com/Lealdos/TT-glab#readme",
+    "dependencies": {
+        "@emotion/react": "^11.13.3",
+        "@emotion/styled": "^11.13.0",
+        "@mui/material": "^6.1.1",
+        "@mui/x-date-pickers": "^7.18.0",
+        "@nestjs/config": "^3.2.3",
+        "react-hook-form": "^7.53.0",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "concurrently": "^9.0.1"
+    }
 }
