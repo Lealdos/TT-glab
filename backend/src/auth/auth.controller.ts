@@ -13,7 +13,6 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  // Endpoint para el login
   @Post('login')
   async login(@Body() body: { email: string; password: string }) {
     const user = await this.authService.validateUser(body.email, body.password);
@@ -23,7 +22,6 @@ export class AuthController {
     return this.authService.login(user);
   }
 
-  // Endpoint para registrar un nuevo usuario
   @Post('register')
   async register(
     @Body()

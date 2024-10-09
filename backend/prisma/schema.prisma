@@ -29,10 +29,19 @@ model Reservation {
   numberOfPeople  Int
   description     String?
   userId          String
+  status          Status   @default(PENDING)
   user            User     @relation(fields: [userId], references: [id])
 }
 
 enum Role {
   ADMIN
   CLIENT
+}
+
+enum Status {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELED
+  COMPLETED
 }

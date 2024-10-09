@@ -15,13 +15,12 @@ import { Roles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 
 @Controller('reservations')
-@UseGuards(JwtAuthGuard, RolesGuard) // Proteger todas las rutas con autenticación y autorización
+// @UseGuards(JwtAuthGuard, RolesGuard) // Proteger todas las rutas con autenticación y autorización
 export class ReservationController {
   constructor(private readonly reservationService: ReservationService) {}
 
   // Crear una nueva reserva (solo administradores)
   @Post()
-  @Roles(Role.ADMIN)
   async createReservation(
     @Body()
     reservationData: {
@@ -69,7 +68,7 @@ export class ReservationController {
 
   // Actualizar una reserva (solo administradores)
   @Put(':id')
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.CLIENT)
   async updateReservation(
     @Param('id') id: string,
     @Body()
@@ -92,7 +91,7 @@ export class ReservationController {
 
   // Eliminar una reserva (solo administradores)
   @Delete(':id')
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.CLIENT)
   async deleteReservation(@Param('id') id: string): Promise<Reservation> {
     return this.reservationService.deleteReservation(id);
   }

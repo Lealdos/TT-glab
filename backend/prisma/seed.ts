@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import * as fs from 'fs';
 import * as path from 'path';
 import { parse } from 'csv-parse';
+import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -41,7 +42,7 @@ async function main() {
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
-          password: user.password,
+          password: bcrypt.hashSync(user.password, 10),
           role: user.role as 'ADMIN' | 'CLIENT',
         },
       }),
