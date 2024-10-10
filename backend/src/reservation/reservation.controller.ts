@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ReservationService } from './reservation.service';
-import { Reservation, Role } from '@prisma/client';
+import { Reservation, Role, Status } from '@prisma/client';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Roles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
@@ -19,7 +19,6 @@ import { RolesGuard } from '../auth/roles.guard';
 export class ReservationController {
   constructor(private readonly reservationService: ReservationService) {}
 
-  // Crear una nueva reserva (solo administradores)
   @Post()
   async createReservation(
     @Body()
@@ -50,14 +49,12 @@ export class ReservationController {
     });
   }
 
-  // Obtener todas las reservas (accesible para usuarios y administradores)
   @Get()
   @Roles(Role.ADMIN, Role.CLIENT)
   async getAllReservations(): Promise<Reservation[]> {
     return this.reservationService.getAllReservations();
   }
 
-  // Obtener una reserva por ID (accesible para usuarios y administradores)
   @Get(':id')
   @Roles(Role.ADMIN, Role.CLIENT)
   async getReservationById(
@@ -66,7 +63,6 @@ export class ReservationController {
     return this.reservationService.getReservationById(id);
   }
 
-  // Actualizar una reserva (solo administradores)
   @Put(':id')
   @Roles(Role.ADMIN, Role.CLIENT)
   async updateReservation(
@@ -77,6 +73,7 @@ export class ReservationController {
       reservationType?: string;
       numberOfPeople?: number;
       description?: string;
+      status?: Status;
     },
   ): Promise<Reservation> {
     return this.reservationService.updateReservation(id, {
@@ -89,7 +86,6 @@ export class ReservationController {
     });
   }
 
-  // Eliminar una reserva (solo administradores)
   @Delete(':id')
   @Roles(Role.ADMIN, Role.CLIENT)
   async deleteReservation(@Param('id') id: string): Promise<Reservation> {

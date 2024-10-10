@@ -40,7 +40,7 @@ export class ReservationService {
     const reservation = await this.prisma.reservation.findUnique({
       where: { id },
       include: {
-        user: true, // Incluir la información del usuario relacionado
+        user: true,
       },
     });
 
