@@ -28,6 +28,8 @@ async function readCSV(filePath: string): Promise<any[]> {
 async function main() {
   await prisma.reservation.deleteMany();
   console.log('All reservations deleted');
+  await prisma.role.deleteMany();
+  console.log('All roles deleted');
   await prisma.user.deleteMany();
   console.log('All users deleted');
 
@@ -43,12 +45,35 @@ async function main() {
           lastName: user.lastName,
           email: user.email,
           password: bcrypt.hashSync(user.password, 10),
-          role: user.role as 'ADMIN' | 'CLIENT',
         },
       }),
     ),
   );
   console.log(`Usuarios creados: ${userRecords.length}`);
+
+  // Cargar y crear roles desde roles.csv
+  const rolesFilePath = path.join(__dirname, 'seed-data', 'roles.csv');
+  const roles = await readCSV(rolesFilePath);
+
+  const rolePromises = roles.map(async (role) => {
+    const user = userRecords.find((u) => u.id === role.userId);
+
+    if (!user) {
+      console.error(`Usuario no encontrado para el rol: ${role.userId}`);
+      return null;
+    }
+
+    return prisma.role.create({
+      data: {
+        id: role.id || undefined,
+        userId: role.userId,
+        role: role.role as 'ADMIN' | 'CLIENT', // Enum de Prisma
+      },
+    });
+  });
+
+  const createdRoles = await Promise.all(rolePromises);
+  console.log(`Roles creados: ${createdRoles.filter(Boolean).length}`);
 
   const reservationsFilePath = path.join(
     __dirname,

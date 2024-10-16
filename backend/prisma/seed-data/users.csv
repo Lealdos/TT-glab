@@ -1,11 +1,6 @@
-firstName,lastName,email,password,role
-Alice,Johnson,alice@example.com,password123,ADMIN
-Bob,Smith,bob@example.com,password123,CLIENT
-Charlie,Brown,charlie@example.com,password123,CLIENT
-David,Clark,david@example.com,password123,CLIENT
-Eve,Martinez,eve@example.com,password123,CLIENT
-Frank,Wright,frank@example.com,password123,CLIENT
-Grace,Lee,grace@example.com,password123,CLIENT
-Henry,White,henry@example.com,password123,ADMIN
-Ivy,Walker,ivy@example.com,password123,CLIENT
-John,Doe,john@example.com,password123,CLIENT
+id,firstName,lastName,email,password
+a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11,Alice,Johnson,alice@example.com,password123
+b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a12,Bob,Smith,bob@example.com,password123
+c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a13,Charlie,Brown,charlie@example.com,password123
+d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a14,David,Clark,david@example.com,password123
+e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a15,Eve,Martinez,eve@example.com,password123
