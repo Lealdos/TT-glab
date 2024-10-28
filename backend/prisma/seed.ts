@@ -116,9 +116,6 @@ async function main() {
           | 'SPECIAL_OCCASION',
         numberOfPeople: parseInt(reservation.numberOfPeople, 10),
         description: reservation.description,
-        user: {
-          connect: { id: user.id }, // Conectar la reserva al usuario encontrado
-        },
       },
     });
   });

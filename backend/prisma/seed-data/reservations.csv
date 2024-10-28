@@ -1,11 +1,11 @@
-id,firstName,lastName,documentType,documentNumber,email,reservationDate,reservationType,numberOfPeople,description,userId,status
-r0eebc99-9c0b-4ef8-bb6d-6bb9bd380a01,Alice,Johnson,DNI,12345678,alice@example.com,2023-12-01T19:00:00.000Z,DINNER,4,Birthday dinner,a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11,PENDING
-r1eebc99-9c0b-4ef8-bb6d-6bb9bd380a02,Bob,Smith,DNI,87654321,bob@example.com,2023-12-02T12:30:00.000Z,LUNCH,2,Lunch with client,b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a12,ACCEPTED
-r2eebc99-9c0b-4ef8-bb6d-6bb9bd380a03,Charlie,Brown,Passport,11223344,charlie@example.com,2023-12-05T18:00:00.000Z,SPECIAL_OCCASION,5,Anniversary celebration,c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a13,PENDING
-r3eebc99-9c0b-4ef8-bb6d-6bb9bd380a04,David,Clark,DNI,22334455,david@example.com,2023-12-07T20:00:00.000Z,DINNER,3,Family dinner,d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a14,PENDING
-r4eebc99-9c0b-4ef8-bb6d-6bb9bd380a05,Eve,Martinez,Driver License,33445566,eve@example.com,2023-12-10T13:00:00.000Z,LUNCH,6,Company team lunch,e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a15,PENDING
-r5eebc99-9c0b-4ef8-bb6d-6bb9bd380a06,Grace,Lee,DNI,44556677,grace@example.com,2023-12-12T19:30:00.000Z,DINNER,2,Romantic dinner,a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11,COMPLETED
-r6eebc99-9c0b-4ef8-bb6d-6bb9bd380a07,Henry,White,DNI,55667788,henry@example.com,2023-12-15T11:00:00.000Z,BIRTHDAY,10,Surprise birthday party,b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a12,PENDING
-r7eebc99-9c0b-4ef8-bb6d-6bb9bd380a08,Ivy,Walker,DNI,66778899,ivy@example.com,2023-12-20T17:00:00.000Z,LUNCH,4,Friends reunion,c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a13,CANCELED
-r8eebc99-9c0b-4ef8-bb6d-6bb9bd380a09,John,Doe,DNI,77889900,john@example.com,2023-12-22T21:00:00.000Z,DINNER,8,Holiday celebration,d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a14,PENDING
-r9eebc99-9c0b-4ef8-bb6d-6bb9bd380a10,Eve,Martinez,DNI,88990011,eve@example.com,2023-12-25T20:00:00.000Z,DINNER,2,Christmas dinner,e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a15,PENDING
+id,firstName,lastName,documentType,documentNumber,email,reservationDate,reservationType,numberOfPeople,description,status
+r0eebc99-9c0b-4ef8-bb6d-6bb9bd380a01,Alice,Johnson,DNI,12345678,alice@example.com,2023-12-01T19:00:00.000Z,DINNER,4,Birthday dinner,PENDING
+r1eebc99-9c0b-4ef8-bb6d-6bb9bd380a02,Bob,Smith,DNI,87654321,bob@example.com,2023-12-02T12:30:00.000Z,LUNCH,2,Lunch with client,ACCEPTED
+r2eebc99-9c0b-4ef8-bb6d-6bb9bd380a03,Charlie,Brown,Passport,11223344,charlie@example.com,2023-12-05T18:00:00.000Z,SPECIAL_OCCASION,5,Anniversary celebration,PENDING
+r3eebc99-9c0b-4ef8-bb6d-6bb9bd380a04,David,Clark,DNI,22334455,david@example.com,2023-12-07T20:00:00.000Z,DINNER,3,Family dinner,PENDING
+r4eebc99-9c0b-4ef8-bb6d-6bb9bd380a05,Eve,Martinez,Driver License,33445566,eve@example.com,2023-12-10T13:00:00.000Z,LUNCH,6,Company team lunch,PENDING
+r5eebc99-9c0b-4ef8-bb6d-6bb9bd380a06,Grace,Lee,DNI,44556677,grace@example.com,2023-12-12T19:30:00.000Z,DINNER,2,Romantic dinner,COMPLETED
+r6eebc99-9c0b-4ef8-bb6d-6bb9bd380a07,Henry,White,DNI,55667788,henry@example.com,2023-12-15T11:00:00.000Z,BIRTHDAY,10,Surprise birthday party,PENDING
+r7eebc99-9c0b-4ef8-bb6d-6bb9bd380a08,Ivy,Walker,DNI,66778899,ivy@example.com,2023-12-20T17:00:00.000Z,LUNCH,4,Friends reunion,CANCELED
+r8eebc99-9c0b-4ef8-bb6d-6bb9bd380a09,John,Doe,DNI,77889900,john@example.com,2023-12-22T21:00:00.000Z,DINNER,8,Holiday celebration,PENDING
+r9eebc99-9c0b-4ef8-bb6d-6bb9bd380a10,Eve,Martinez,DNI,88990011,eve@example.com,2023-12-25T20:00:00.000Z,DINNER,2,Christmas dinner,PENDING

@@ -2,5 +2,5 @@ id,userId,role
 a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a16,a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11,ADMIN
 b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a17,b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a12,CLIENT
 c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a18,c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a13,CLIENT
-d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a19,d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a14,CLIENT
+d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a19,d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a14,ADMIN
 e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a20,e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a15,CLIENT
