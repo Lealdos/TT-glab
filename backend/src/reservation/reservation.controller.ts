@@ -45,18 +45,17 @@ export class ReservationController {
       documentType: reservationData.documentType,
       documentNumber: reservationData.documentNumber,
       email: reservationData.email,
-      user: { connect: { id: reservationData.userId } },
     });
   }
 
   @Get()
-  @Roles(Role.ADMIN, Role.CLIENT)
+  // @Roles(Role.ADMIN, Role.CLIENT)
   async getAllReservations(): Promise<Reservation[]> {
     return this.reservationService.getAllReservations();
   }
 
   @Get(':id')
-  @Roles(Role.ADMIN, Role.CLIENT)
+  // @Roles(Role.ADMIN, Role.CLIENT)
   async getReservationById(
     @Param('id') id: string,
   ): Promise<Reservation | null> {
@@ -64,7 +63,7 @@ export class ReservationController {
   }
 
   @Put(':id')
-  @Roles(Role.ADMIN, Role.CLIENT)
+  // @Roles(Role.ADMIN, Role.CLIENT)
   async updateReservation(
     @Param('id') id: string,
     @Body()
@@ -87,7 +86,7 @@ export class ReservationController {
   }
 
   @Delete(':id')
-  @Roles(Role.ADMIN, Role.CLIENT)
+  // @Roles(Role.ADMIN, Role.CLIENT)
   async deleteReservation(@Param('id') id: string): Promise<Reservation> {
     return this.reservationService.deleteReservation(id);
   }

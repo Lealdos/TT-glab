@@ -23,10 +23,6 @@ export const Home: React.FC = () => {
             <h1>TT glab</h1>
             <p>Prueba técnica glab</p>
 
-            <Typography variant='h4' component='h1' gutterBottom>
-                <Link to='/register'>Register</Link>
-            </Typography>
-
             <Typography
                 sx={{
                     textDecoration: 'none',

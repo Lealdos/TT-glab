@@ -24,11 +24,7 @@ export class ReservationService {
    * @returns Lista de todas las reservas.
    */
   async getAllReservations(): Promise<Reservation[]> {
-    return this.prisma.reservation.findMany({
-      include: {
-        user: true,
-      },
-    });
+    return this.prisma.reservation.findMany();
   }
 
   /**
@@ -39,9 +35,6 @@ export class ReservationService {
   async getReservationById(id: string): Promise<Reservation | null> {
     const reservation = await this.prisma.reservation.findUnique({
       where: { id },
-      include: {
-        user: true,
-      },
     });
 
     if (!reservation) {
