@@ -13,3 +13,7 @@ export const loginService = async (data: LoginData) => {
     localStorage.setItem('authToken', response.data.token);
     return response.data;
 };
+
+export const logoutService = () => {
+    localStorage.removeItem('authToken');
+};
