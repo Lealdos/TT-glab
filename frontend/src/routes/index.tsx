@@ -6,6 +6,7 @@ import { Dashboard } from './../pages/Dashboard.tsx';
 import { Register } from './../pages/Register.tsx';
 import { PrivateRoute } from './PrivateRoute';
 import { Reservation } from './../pages/reservation';
+import { ThankYou } from './../pages/Thank-you';
 export function Router(): React.ReactElement {
     return (
         <Routes>
@@ -13,6 +14,7 @@ export function Router(): React.ReactElement {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='reservation' element={<Reservation />} />
+            <Route path='thank-you' element={<ThankYou />} />
             <Route
                 path='/dashboard'
                 element={
