@@ -1,8 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../components/context/AuthContext';
 
 export const Home: React.FC = () => {
+    const { isAuthenticated } = useAuthContext();
     return (
         <Box
             sx={{
@@ -32,7 +34,7 @@ export const Home: React.FC = () => {
                 component='h1'
                 gutterBottom
             >
-                <Link to='/login'>Login</Link>
+                {!isAuthenticated && <Link to='/login'>Login</Link>}
             </Typography>
             <Typography variant='h4' component='h1' gutterBottom>
                 <Link to='/reservation'>Reservation</Link>
