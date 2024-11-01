@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createReservationService } from '../services/reservationService';
 
-// Definir el esquema de validación con Zod
+// Definir el esquema de validación
 const reservationSchema = z.object({
     firstName: z.string().min(1, 'First name is required'),
     lastName: z.string().min(1, 'Last name is required'),
