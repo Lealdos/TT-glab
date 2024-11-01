@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginService } from '../services/AuthService';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../components/context/AuthContext';
 
 const loginSchema = z.object({
     email: z.string().email('Invalid email address'),
@@ -13,6 +14,7 @@ const loginSchema = z.object({
 type LoginFormInputs = z.infer<typeof loginSchema>;
 
 export const useLoginViewModel = () => {
+    const { setIsAuthenticated } = useAuthContext();
     const {
         register,
         handleSubmit,
@@ -27,6 +29,7 @@ export const useLoginViewModel = () => {
         try {
             await loginService(data);
             setAuthError(null);
+            setIsAuthenticated(true);
             navigate('/dashboard');
         } catch (error: unknown) {
             console.error(error);
