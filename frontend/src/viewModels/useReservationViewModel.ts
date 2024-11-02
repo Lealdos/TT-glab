@@ -40,7 +40,7 @@ export const useReservationViewModel = () => {
     });
 
     const [submitError, setSubmitError] = useState<string | null>(null);
-    const navigate = useNavigate(); // Para redirigir después de crear una reservación
+    const navigate = useNavigate(); //redirigir hook
 
     const onSubmit: SubmitHandler<ReservationFormInputs> = async ({
         reservationDate,
