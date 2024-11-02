@@ -36,7 +36,9 @@ export const Dashboard: React.FC = () => {
                 <TableHead>
                     <TableRow>
                         <TableCell>Full name</TableCell>
+                        <TableCell>Document Type</TableCell>
                         <TableCell>Document number</TableCell>
+                        <TableCell align='center'>Email</TableCell>
                         <TableCell>Date of reservation</TableCell>
                         <TableCell>Number of people</TableCell>
                         <TableCell>Status</TableCell>
@@ -47,7 +49,7 @@ export const Dashboard: React.FC = () => {
                         <TableRow
                             sx={{
                                 ':hover': {
-                                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.08)',
                                 },
                             }}
                             key={reservation.id}
@@ -58,13 +60,23 @@ export const Dashboard: React.FC = () => {
                             <TableCell component='th' scope='row'>
                                 {reservation.firstName} {reservation.lastName}
                             </TableCell>
-                            <TableCell>{reservation.documentNumber}</TableCell>
+                            <TableCell align='center'>
+                                {reservation.documentType}
+                            </TableCell>
+                            <TableCell align='center'>
+                                {reservation.documentNumber}
+                            </TableCell>
+                            <TableCell align='center'>
+                                {reservation.email}
+                            </TableCell>
                             <TableCell>
                                 {dayjs(reservation.reservationDate).format(
                                     'MM/DD/YYYY hh:mm A'
                                 )}
                             </TableCell>
-                            <TableCell>{reservation.numberOfPeople}</TableCell>
+                            <TableCell align='center'>
+                                {reservation.numberOfPeople}
+                            </TableCell>
                             <TableCell>{reservation.status}</TableCell>
                         </TableRow>
                     ))}
