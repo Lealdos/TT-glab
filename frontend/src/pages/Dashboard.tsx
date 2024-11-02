@@ -61,7 +61,7 @@ export const Dashboard: React.FC = () => {
                             <TableCell>{reservation.documentNumber}</TableCell>
                             <TableCell>
                                 {dayjs(reservation.reservationDate).format(
-                                    'MM/DD/YYYY'
+                                    'MM/DD/YYYY hh:mm A'
                                 )}
                             </TableCell>
                             <TableCell>{reservation.numberOfPeople}</TableCell>
