@@ -6,6 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createReservationService } from '../services/reservationService';
 import dayjs from 'dayjs';
 
+interface ReservationUpdateData {
+    reservationDate?: string;
+    reservationType?: string;
+    numberOfPeople?: number;
+    status?: string;
+}
+
 // Definir el esquema de validación
 const reservationSchema = z.object({
     firstName: z.string().min(1, 'First name is required'),
@@ -62,6 +69,21 @@ export const useReservationViewModel = () => {
         }
     };
 
+    const updateReservationService = async (
+        id: string,
+        data: ReservationUpdateData
+    ) => {
+        try {
+            await updateReservationService(id, data);
+            setSubmitError(null);
+            reset();
+            navigate('/thank-you');
+        } catch (error: unknown) {
+            console.error(error);
+            setSubmitError('Failed to update reservation. Please try again.');
+        }
+    };
+
     return {
         register,
         handleSubmit,
@@ -69,5 +91,6 @@ export const useReservationViewModel = () => {
         submitError,
         onSubmit,
         control,
+        updateReservationService,
     };
 };
