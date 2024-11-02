@@ -9,11 +9,14 @@ import {
     InputLabel,
     FormControl,
 } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
+import { Controller } from 'react-hook-form';
+
 import { useReservationViewModel } from '../viewModels/useReservationViewModel';
+import { Dayjs } from 'dayjs';
 
 export const Reservation: React.FC = () => {
-    const { register, handleSubmit, errors, submitError, onSubmit } =
+    const { register, handleSubmit, errors, submitError, onSubmit, control } =
         useReservationViewModel();
 
     return (
@@ -104,16 +107,29 @@ export const Reservation: React.FC = () => {
                     helperText={errors.email?.message}
                 />
                 <FormControl fullWidth margin='normal'>
-                    <DatePicker
-                        label='Reservation Date'
-                        {...register('reservationDate')}
-                        onChange={() => {}}
-                        slotProps={{
-                            textField: {
-                                error: !!errors.reservationDate,
-                                helperText: errors.reservationDate?.message,
-                            },
-                        }}
+                    <Controller
+                        control={control}
+                        name='reservationDate'
+                        defaultValue={undefined}
+                        render={({ field }) => (
+                            <MobileDateTimePicker
+                                {...field}
+                                label='Reservation Date'
+                                value={field.value || null}
+                                views={['year', 'day', 'hours', 'minutes']}
+                                onChange={(date: Dayjs | null) =>
+                                    field.onChange(date)
+                                }
+                                slotProps={{
+                                    textField: {
+                                        error: !!errors.reservationDate,
+                                        helperText:
+                                            errors.reservationDate?.message,
+                                    },
+                                }}
+                                arial-label='reservation date'
+                            />
+                        )}
                     />
                 </FormControl>
                 <FormControl fullWidth margin='normal'>
