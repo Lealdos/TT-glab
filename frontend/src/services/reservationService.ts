@@ -3,6 +3,7 @@ const API_URL =
     import.meta.env.VITE_REACT_APP_API_URL || 'http://localhost:3000';
 
 export interface ReservationData {
+    id?: string;
     firstName: string;
     lastName: string;
     documentType: 'DNI' | 'Passport' | 'Driver License';
@@ -17,6 +18,7 @@ export interface ReservationData {
         | 'dinner parties';
     numberOfPeople: number;
     description?: string;
+    status?: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELED' | 'COMPLETED';
 }
 
 interface ReservationUpdateData {
