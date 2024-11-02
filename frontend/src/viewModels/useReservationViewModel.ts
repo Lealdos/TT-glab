@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createReservationService } from '../services/reservationService';
+import dayjs from 'dayjs';
 
 // Definir el esquema de validación
 const reservationSchema = z.object({
@@ -12,7 +13,9 @@ const reservationSchema = z.object({
     documentType: z.enum(['DNI', 'Passport', 'Driver License']),
     documentNumber: z.string().min(5, 'Document number is required'),
     email: z.string().email('Invalid email address'),
-    reservationDate: z.string().min(1, 'Reservation date is required'),
+    reservationDate: z.any().refine((val) => dayjs.isDayjs(val), {
+        message: 'Reservation date is required',
+    }),
     reservationType: z.enum([
         'Dinner',
         'Lunch',
@@ -31,6 +34,7 @@ export const useReservationViewModel = () => {
         handleSubmit,
         formState: { errors },
         reset,
+        control,
     } = useForm<ReservationFormInputs>({
         resolver: zodResolver(reservationSchema),
     });
@@ -38,9 +42,18 @@ export const useReservationViewModel = () => {
     const [submitError, setSubmitError] = useState<string | null>(null);
     const navigate = useNavigate(); // Para redirigir después de crear una reservación
 
-    const onSubmit: SubmitHandler<ReservationFormInputs> = async (data) => {
+    const onSubmit: SubmitHandler<ReservationFormInputs> = async ({
+        reservationDate,
+        ...restData
+    }) => {
         try {
-            await createReservationService(data);
+            console.log(reservationDate);
+            const formattedDate = reservationDate.format('YYYY-MM-DD hh:mm A'); // Convert Dayjs to string
+            console.log(formattedDate);
+            await createReservationService({
+                ...restData,
+                reservationDate: formattedDate,
+            });
             setSubmitError(null);
             reset();
             navigate('/thank-you');
@@ -56,5 +69,6 @@ export const useReservationViewModel = () => {
         errors,
         submitError,
         onSubmit,
+        control,
     };
 };
