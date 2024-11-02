@@ -47,7 +47,6 @@ export const useReservationViewModel = () => {
         ...restData
     }) => {
         try {
-            console.log(reservationDate);
             const formattedDate = reservationDate.format('YYYY-MM-DD hh:mm A'); // Convert Dayjs to string
             console.log(formattedDate);
             await createReservationService({
