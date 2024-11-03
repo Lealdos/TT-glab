@@ -76,8 +76,6 @@ export const useReservationViewModel = () => {
         try {
             await updateReservationService(id, data);
             setSubmitError(null);
-            reset();
-            navigate('/thank-you');
         } catch (error: unknown) {
             console.error(error);
             setSubmitError('Failed to update reservation. Please try again.');

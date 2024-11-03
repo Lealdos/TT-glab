@@ -55,7 +55,7 @@ export const updateReservationService = async (
     id: string,
     data: ReservationUpdateData
 ) => {
-    return axios.put(`${API_URL}/reservations/${id}`, data);
+    return axios.put(`${API_URL}/reservations/${id}/update`, data);
 };
 
 export const deleteReservationService = async (id: string) => {

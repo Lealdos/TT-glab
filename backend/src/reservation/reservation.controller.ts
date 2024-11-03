@@ -62,7 +62,7 @@ export class ReservationController {
     return this.reservationService.getReservationById(id);
   }
 
-  @Put(':id')
+  @Put(':id/update')
   // @Roles(Role.ADMIN, Role.CLIENT)
   async updateReservation(
     @Param('id') id: string,
