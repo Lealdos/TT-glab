@@ -27,7 +27,8 @@ export const useLoginViewModel = () => {
 
     const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
         try {
-            await loginService(data);
+            const token = await loginService(data);
+            sessionStorage.setItem('authToken', token.access_token);
             setAuthError(null);
             setIsAuthenticated(true);
             navigate('/dashboard');

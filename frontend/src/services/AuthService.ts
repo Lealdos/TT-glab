@@ -10,9 +10,6 @@ interface LoginData {
 
 export const loginService = async (data: LoginData) => {
     const response = await axios.post(`${API_URL}/auth/login`, data);
-    const token = await response.data.access_token;
-    sessionStorage.setItem('authToken', token);
-
     return response.data;
 };
 

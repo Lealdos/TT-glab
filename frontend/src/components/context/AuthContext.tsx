@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState, useContext, useMemo } from 'react';
+import { getSessionStorageItem } from '../../utils/KeepSessionPersisten';
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -11,7 +12,9 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(
+        getSessionStorageItem('authToken') !== null
+    );
 
     const contextValue = useMemo(
         () => ({
