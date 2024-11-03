@@ -12,7 +12,7 @@ import { config } from '../config/';
   imports: [
     PrismaModule,
     UserModule,
-    PassportModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: config.jwt.secret,
       signOptions: { expiresIn: config.jwt.expiresIn },
