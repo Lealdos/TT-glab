@@ -10,10 +10,11 @@ interface LoginData {
 
 export const loginService = async (data: LoginData) => {
     const response = await axios.post(`${API_URL}/auth/login`, data);
-    localStorage.setItem('authToken', response.data.token);
+    sessionStorage.setItem('authToken', await response.data.access_token);
+
     return response.data;
 };
 
 export const logoutService = () => {
-    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
 };
