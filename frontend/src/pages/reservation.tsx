@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    Box,
     TextField,
     Button,
     MenuItem,
@@ -8,6 +7,7 @@ import {
     Typography,
     InputLabel,
     FormControl,
+    Container,
 } from '@mui/material';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import { Controller } from 'react-hook-form';
@@ -20,12 +20,14 @@ export const Reservation: React.FC = () => {
         useReservationViewModel();
 
     return (
-        <Box
+        <Container
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                mt: 8,
+                backgroundColor: 'purple',
+                borderRadius: 5,
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
             }}
         >
             <Typography variant='h4' component='h1' gutterBottom>
@@ -36,14 +38,13 @@ export const Reservation: React.FC = () => {
                     {submitError}
                 </Typography>
             )}
-            <Box
+            <Container
                 component='form'
                 onSubmit={handleSubmit(onSubmit)}
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    mt: 8,
                     backgroundColor: 'grey',
                     color: 'white',
                     fontSize: 20,
@@ -51,7 +52,6 @@ export const Reservation: React.FC = () => {
                     textAlign: 'center',
                     padding: 2,
                     borderRadius: 5,
-                    width: '500px',
                     margin: 'auto',
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
                 }}
@@ -181,7 +181,7 @@ export const Reservation: React.FC = () => {
                 >
                     Create Reservation
                 </Button>
-            </Box>
-        </Box>
+            </Container>
+        </Container>
     );
 };
