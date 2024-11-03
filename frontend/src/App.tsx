@@ -7,12 +7,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { NavBar } from './components/NavBar';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './components/context/AuthContext';
+import { Container } from '@mui/material';
 
 const App: React.FC = () => {
     return (
-        <div
+        <Container
             style={{
-                backgroundColor: '#242424',
                 height: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
@@ -29,7 +29,7 @@ const App: React.FC = () => {
                     </AuthProvider>
                 </LocalizationProvider>
             </BrowserRouter>
-        </div>
+        </Container>
     );
 };
 
