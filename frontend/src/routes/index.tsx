@@ -11,8 +11,8 @@ export function Router(): React.ReactElement {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+            <Route path='login' element={<Login />} />
+            <Route path='register' element={<Register />} />
             <Route path='reservation' element={<Reservation />} />
             <Route path='thank-you' element={<ThankYou />} />
             <Route
