@@ -9,8 +9,11 @@ interface LoginData {
 }
 
 export const loginService = async (LoginData: LoginData) => {
-    const { data } = await axios.post(`${API_URL}/auth/login`, LoginData);
-    return data;
+    const { data: token } = await axios.post(
+        `${API_URL}/auth/login`,
+        LoginData
+    );
+    return token;
 };
 
 export const logoutService = () => {
