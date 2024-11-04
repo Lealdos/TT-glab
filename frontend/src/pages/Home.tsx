@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../components/context/AuthContext';
@@ -6,21 +6,18 @@ import { useAuthContext } from '../components/context/AuthContext';
 export const Home: React.FC = () => {
     const { isAuthenticated } = useAuthContext();
     return (
-        <Box
+        <Container
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                background:
+                    'linear-gradient(to right bottom, #430089, #82ffa1)',
+                borderRadius: 5,
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+                gap: 2,
+                padding: 2,
             }}
-            component='div'
-            gap={2}
-            p={2}
-            borderRadius={5}
-            bgcolor={'gray'}
-            color='white'
-            fontSize={20}
-            fontWeight={500}
-            textAlign='center'
         >
             <h1>TT glab</h1>
             <p>Prueba técnica glab</p>
@@ -40,8 +37,8 @@ export const Home: React.FC = () => {
                 <Link to='/reservation'>Reservation</Link>
             </Typography>
             <Typography variant='h4' component='h1' gutterBottom>
-                <Link to='/dashboard'>Dashboard</Link>
+                <Link to='admin/dashboard'>Dashboard</Link>
             </Typography>
-        </Box>
+        </Container>
     );
 };
