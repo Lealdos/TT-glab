@@ -1,12 +1,11 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from './context/AuthContext';
 import { logoutService } from '../services/AuthService';
+import { Container } from '@mui/material';
 
 export const NavBar: React.FC = () => {
     const { isAuthenticated, setIsAuthenticated } = useAuthContext();
@@ -17,19 +16,13 @@ export const NavBar: React.FC = () => {
         navigate('/');
     };
     return (
-        <Box top={0} left={0} right={0} position='fixed' bgcolor='#242424'>
-            <AppBar position='static'>
-                <Toolbar
-                    sx={{ justifyContent: 'space-between', bgcolor: '#242424' }}
-                >
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography
-                            variant='h6'
-                            component='div'
-                            sx={{ flexGrow: 1 }}
-                        >
-                            TT glab
-                        </Typography>
+        <Container>
+            <AppBar
+                position='static'
+                sx={{ backgroundColor: '#242424', borderRadius: 5 }}
+            >
+                <Toolbar sx={{ justifyContent: 'space-between' }}>
+                    <Container sx={{ display: 'flex', alignItems: 'center' }}>
                         <Button
                             color='inherit'
                             onClick={() => {
@@ -38,12 +31,12 @@ export const NavBar: React.FC = () => {
                         >
                             Home
                         </Button>
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    </Container>
+                    <Container sx={{ display: 'flex', alignItems: 'center' }}>
                         <Button
                             color='inherit'
                             onClick={() => {
-                                navigate('/dashboard');
+                                navigate('admin/dashboard');
                             }}
                         >
                             Dashboard
@@ -63,9 +56,9 @@ export const NavBar: React.FC = () => {
                                 Login
                             </Button>
                         )}
-                    </Box>
+                    </Container>
                 </Toolbar>
             </AppBar>
-        </Box>
+        </Container>
     );
 };

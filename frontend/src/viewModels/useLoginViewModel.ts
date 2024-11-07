@@ -31,7 +31,7 @@ export const useLoginViewModel = () => {
             sessionStorage.setItem('authToken', token.access_token);
             setAuthError(null);
             setIsAuthenticated(true);
-            navigate('/dashboard');
+            navigate('/admin/dashboard');
         } catch (error: unknown) {
             console.error(error);
             setAuthError('Invalid email or password');

@@ -1,10 +1,16 @@
+import React from 'react';
+import { NavBar } from '../components/NavBar';
 import { Container } from '@mui/material';
-import { Outlet } from 'react-router-dom';
 
-export const Layout: React.FC = () => {
+interface LayoutProps {
+    children: React.ReactNode;
+}
+
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <Container>
-            <Outlet />
+            <NavBar />
+            {children}
         </Container>
     );
 };

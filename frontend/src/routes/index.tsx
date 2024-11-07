@@ -7,7 +7,7 @@ import { Register } from './../pages/Register.tsx';
 import { PrivateRoute } from './PrivateRoute';
 import { Reservation } from './../pages/reservation';
 import { ThankYou } from './../pages/Thank-you';
-import { Layout } from '../components/Layout.tsx';
+import { Layout } from '../routes/Layout.tsx';
 export function Router(): React.ReactElement {
     return (
         <Routes>
