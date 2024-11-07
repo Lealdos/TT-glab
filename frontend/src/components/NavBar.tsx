@@ -16,49 +16,71 @@ export const NavBar: React.FC = () => {
         navigate('/');
     };
     return (
-        <Container>
-            <AppBar
-                position='static'
-                sx={{ backgroundColor: '#242424', borderRadius: 5 }}
+        <AppBar
+            position='static'
+            sx={{
+                background:
+                    'linear-gradient(108deg, rgba(253,187,45,1) 0%, rgba(253,187,45,1) 5%, rgba(34,132,195,1) 76%, rgba(0,0,0,1) 93%)',
+                borderRadius: 5,
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+                marginBottom: 2,
+                display: 'flex',
+                justifyContent: 'space-between',
+            }}
+        >
+            <Toolbar
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                }}
             >
-                <Toolbar sx={{ justifyContent: 'space-between' }}>
-                    <Container sx={{ display: 'flex', alignItems: 'center' }}>
+                <Container
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                    }}
+                >
+                    <Button
+                        color='inherit'
+                        onClick={() => {
+                            navigate('/');
+                        }}
+                    >
+                        Home
+                    </Button>
+                </Container>
+                <Container
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                    }}
+                >
+                    <Button
+                        color='inherit'
+                        onClick={() => {
+                            navigate('/admin/dashboard');
+                        }}
+                    >
+                        Dashboard
+                    </Button>
+                    {isAuthenticated && (
+                        <Button color='inherit' onClick={logOut}>
+                            Logout
+                        </Button>
+                    )}
+                    {!isAuthenticated && (
                         <Button
                             color='inherit'
                             onClick={() => {
-                                navigate('/');
+                                navigate('/login');
                             }}
                         >
-                            Home
+                            Login
                         </Button>
-                    </Container>
-                    <Container sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Button
-                            color='inherit'
-                            onClick={() => {
-                                navigate('admin/dashboard');
-                            }}
-                        >
-                            Dashboard
-                        </Button>
-                        {isAuthenticated && (
-                            <Button color='inherit' onClick={logOut}>
-                                Logout
-                            </Button>
-                        )}
-                        {!isAuthenticated && (
-                            <Button
-                                color='inherit'
-                                onClick={() => {
-                                    navigate('/login');
-                                }}
-                            >
-                                Login
-                            </Button>
-                        )}
-                    </Container>
-                </Toolbar>
-            </AppBar>
-        </Container>
+                    )}
+                </Container>
+            </Toolbar>
+        </AppBar>
     );
 };

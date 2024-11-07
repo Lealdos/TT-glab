@@ -49,15 +49,18 @@ export const Dashboard: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    backgroundColor: 'grey',
+                    background:
+                        'linear-gradient(108deg, rgba(253,187,45,1) 0%, rgba(253,187,45,1) 5%, rgba(34,132,195,1) 76%, rgba(0,0,0,1) 93%)',
                     borderRadius: 5,
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+                    color: 'white',
                 }}
+                color='white'
             >
                 <TableContainer component={Container} sx={{ borderRadius: 5 }}>
                     <Table aria-label='reservations table'>
                         <TableHead>
-                            <TableRow>
+                            <TableRow color='white'>
                                 <TableCell>Full name</TableCell>
                                 <TableCell>Document Type</TableCell>
                                 <TableCell>Document number</TableCell>
