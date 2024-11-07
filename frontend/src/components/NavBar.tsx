@@ -20,7 +20,7 @@ export const NavBar: React.FC = () => {
             position='static'
             sx={{
                 background:
-                    'linear-gradient(108deg, rgba(253,187,45,1) 0%, rgba(253,187,45,1) 5%, rgba(34,132,195,1) 76%, rgba(0,0,0,1) 93%)',
+                    'linear-gradient(108deg, rgba(253,187,45,1) 0%, rgba(253,187,45,1) 0%, rgba(34,132,195,1) 100%, rgba(0,0,0,1) 100%);',
                 borderRadius: 5,
                 boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
                 marginBottom: 2,
