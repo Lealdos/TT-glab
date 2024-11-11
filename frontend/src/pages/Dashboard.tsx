@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 
 import dayjs from 'dayjs';
-import { ReservationModal } from '../components/Modal';
+import { ReservationModal } from '../components/ModalReservation';
 import { Layout } from '../components/Layout';
 
 export const Dashboard: React.FC = () => {
