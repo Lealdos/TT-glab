@@ -27,9 +27,9 @@ export const Reservation: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    backgroundColor: 'purple',
                     borderRadius: 5,
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+                    padding: 2,
                 }}
             >
                 <Typography variant='h4' component='h1' gutterBottom>
@@ -47,12 +47,12 @@ export const Reservation: React.FC = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        backgroundColor: 'grey',
                         color: 'white',
+                        background: 'white',
+                        padding: 2,
                         fontSize: 20,
                         fontWeight: 500,
                         textAlign: 'center',
-                        padding: 2,
                         borderRadius: 5,
                         margin: 'auto',
                         boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',

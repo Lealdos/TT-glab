@@ -1,9 +1,7 @@
 @import url('https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css');
 #root {
     color: white;
-}
 
-body {
     font-family: 'Roboto', sans-serif;
     background: rgb(0, 0, 0);
     background: linear-gradient(
@@ -13,5 +11,4 @@ body {
         rgba(253, 187, 45, 1) 100%,
         rgba(253, 187, 45, 1) 100%
     );
-    height: 100vh;
 }

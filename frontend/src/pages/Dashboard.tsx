@@ -53,7 +53,6 @@ export const Dashboard: React.FC = () => {
                         ' linear-gradient(108deg, rgba(253,187,45,1) 0%, rgba(253,187,45,1) 0%, rgba(34,132,195,1) 100%, rgba(0,0,0,1) 100%);',
                     borderRadius: 5,
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-                    color: 'white',
                 }}
             >
                 <TableContainer component={Container} sx={{ borderRadius: 5 }}>
