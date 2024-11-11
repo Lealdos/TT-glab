@@ -12,14 +12,15 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                height: '100vh',
                 justifyContent: 'space-between',
+                height: '100vh',
+                overflow: 'auto',
             }}
         >
             <NavBar />
             {children}
             <footer>
-                <Typography variant='body1' align='center'>
+                <Typography variant='h6' align='center'>
                     Made with ❤️ by Lealdos
                 </Typography>
             </footer>
