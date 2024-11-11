@@ -15,6 +15,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 justifyContent: 'space-between',
                 height: '100vh',
                 overflow: 'auto',
+                gap: 2,
             }}
         >
             <NavBar />
