@@ -7,7 +7,7 @@ import { Register } from './../pages/Register.tsx';
 import { PrivateRoute } from './PrivateRoute';
 import { Reservation } from './../pages/reservation';
 import { ThankYou } from './../pages/Thank-you';
-import { Layout } from '../routes/Layout.tsx';
+import { RouteAdminLayout } from '../routes/Layout.tsx';
 export function Router(): React.ReactElement {
     return (
         <Routes>
@@ -16,7 +16,7 @@ export function Router(): React.ReactElement {
             <Route path='register' element={<Register />} />
             <Route path='reservation' element={<Reservation />} />
             <Route path='thank-you' element={<ThankYou />} />
-            <Route path='admin' element={<Layout />}>
+            <Route path='admin' element={<RouteAdminLayout />}>
                 <Route
                     path='dashboard'
                     element={
