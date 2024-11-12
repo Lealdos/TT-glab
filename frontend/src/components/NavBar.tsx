@@ -49,6 +49,14 @@ export const NavBar: React.FC = () => {
                     >
                         Home
                     </Button>
+                    <Button
+                        color='inherit'
+                        onClick={() => {
+                            navigate('/reservation');
+                        }}
+                    >
+                        Reservations
+                    </Button>
                 </Container>
                 <Container
                     sx={{
