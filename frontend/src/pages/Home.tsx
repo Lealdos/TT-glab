@@ -22,7 +22,7 @@ export const Home: React.FC = () => {
                 }}
             >
                 <Typography variant='h1' component='h1' gutterBottom>
-                    TT glab
+                    Restaurant Reservation
                 </Typography>
                 <Typography variant='h4' component='p' gutterBottom>
                     Technical Test
