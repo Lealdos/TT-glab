@@ -29,10 +29,14 @@ export const NavBar: React.FC = () => {
             }}
         >
             <Toolbar
-                style={{
+                sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
+                    '@media (max-width: 600px)': {
+                        width: '100%',
+                        overflow: 'auto',
+                    },
                 }}
             >
                 <Container
@@ -49,14 +53,6 @@ export const NavBar: React.FC = () => {
                     >
                         Home
                     </Button>
-                    <Button
-                        color='inherit'
-                        onClick={() => {
-                            navigate('/reservation');
-                        }}
-                    >
-                        Reservations
-                    </Button>
                 </Container>
                 <Container
                     sx={{
@@ -71,6 +67,14 @@ export const NavBar: React.FC = () => {
                         }}
                     >
                         Dashboard
+                    </Button>
+                    <Button
+                        color='inherit'
+                        onClick={() => {
+                            navigate('/reservation');
+                        }}
+                    >
+                        Reservations
                     </Button>
                     {isAuthenticated && (
                         <Button color='inherit' onClick={logOut}>
