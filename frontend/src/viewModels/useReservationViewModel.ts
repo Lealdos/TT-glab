@@ -5,15 +5,9 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createReservationService } from '../services/reservationService';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 
-interface ReservationUpdateData {
-    reservationDate?: string;
-    reservationType?: string;
-    numberOfPeople?: number;
-    status?: string;
-}
-
-// Definir el esquema de validación
+//esquema de validación
 const reservationSchema = z.object({
     firstName: z.string().min(1, 'First name is required'),
     lastName: z.string().min(1, 'Last name is required'),
@@ -55,7 +49,6 @@ export const useReservationViewModel = () => {
     }) => {
         try {
             const formattedDate = reservationDate.format('YYYY-MM-DD hh:mm A'); // Convert Dayjs to string
-            console.log(formattedDate);
             await createReservationService({
                 ...restData,
                 reservationDate: formattedDate,
@@ -63,22 +56,10 @@ export const useReservationViewModel = () => {
             setSubmitError(null);
             reset();
             navigate('/thank-you');
+            toast('Reservation created successfully');
         } catch (error: unknown) {
             console.error(error);
             setSubmitError('Failed to create reservation. Please try again.');
-        }
-    };
-
-    const updateReservationService = async (
-        id: string,
-        data: ReservationUpdateData
-    ) => {
-        try {
-            await updateReservationService(id, data);
-            setSubmitError(null);
-        } catch (error: unknown) {
-            console.error(error);
-            setSubmitError('Failed to update reservation. Please try again.');
         }
     };
 
@@ -89,6 +70,5 @@ export const useReservationViewModel = () => {
         submitError,
         onSubmit,
         control,
-        updateReservationService,
     };
 };

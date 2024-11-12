@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import dayjs from 'dayjs';
+import { ReservationData } from '../services/reservationService';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & { children: React.ReactElement },
@@ -23,27 +24,28 @@ const Transition = React.forwardRef(function Transition(
 type ReservationModalProps = {
     open: boolean;
     onClose: () => void;
-    reservation: {
-        firstName: string;
-        lastName: string;
-        documentType: string;
-        documentNumber: string;
-        email: string;
-        reservationDate: string;
-        reservationType: string;
-        numberOfPeople: number;
-        description?: string;
-    } | null;
+    reservation: ReservationData | null;
+    handleToast: (message: string, type: 'success' | 'error') => void;
 };
 
 export const ReservationModal: React.FC<ReservationModalProps> = ({
     open,
     onClose,
     reservation,
+    handleToast,
 }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     if (!reservation) return null;
+
+    const handleSave = () => {
+        handleToast('Reservation saved successfully', 'success');
+        onClose();
+    };
+    const handleClose = () => {
+        handleToast('Reservation cancelled', 'error');
+        onClose();
+    };
 
     return (
         <Dialog
@@ -101,8 +103,9 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                 )}
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose} color='primary'>
-                    Close
+                <Button onClick={handleSave}>Save</Button>
+                <Button onClick={handleClose} color='error'>
+                    Cancel
                 </Button>
             </DialogActions>
         </Dialog>

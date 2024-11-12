@@ -17,6 +17,8 @@ import {
 import dayjs from 'dayjs';
 import { ReservationModal } from '../components/ModalReservation';
 import { Layout } from '../components/Layout';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Dashboard: React.FC = () => {
     const [reservations, setReservations] = useState<ReservationData[] | null>(
@@ -42,6 +44,23 @@ export const Dashboard: React.FC = () => {
         };
         fetchReservations();
     }, []);
+
+    const handleToast = (
+        message: string,
+        type: 'success' | 'error' | 'info'
+    ) => {
+        toast(message, {
+            type,
+            position: 'bottom-right',
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            autoClose: 6000,
+        });
+    };
+
     return (
         <Layout>
             <Container
@@ -113,6 +132,7 @@ export const Dashboard: React.FC = () => {
                     open={openModal}
                     onClose={handleCloseModal}
                     reservation={selectedReservation}
+                    handleToast={handleToast}
                 />
             </Container>
         </Layout>
