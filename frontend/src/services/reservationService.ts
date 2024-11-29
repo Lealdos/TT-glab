@@ -4,6 +4,7 @@ const API_URL =
 
 export interface ReservationData {
     id?: string;
+    status?: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELED' | 'COMPLETED';
     firstName: string;
     lastName: string;
     documentType: 'DNI' | 'Passport' | 'Driver License';
@@ -18,7 +19,6 @@ export interface ReservationData {
         | 'dinner parties';
     numberOfPeople: number;
     description?: string;
-    status?: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELED' | 'COMPLETED';
 }
 
 interface ReservationUpdateData {
@@ -55,6 +55,7 @@ export const updateReservationService = async (
     id: string,
     data: ReservationUpdateData
 ) => {
+    console.log('updateReservationService', id, data);
     return axios.put(`${API_URL}/reservations/${id}/update`, data);
 };
 
