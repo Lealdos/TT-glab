@@ -5,13 +5,19 @@ import {
     DialogContent,
     DialogActions,
     Button,
-    Typography,
+    TextField,
     Slide,
+    Select,
+    MenuItem,
     useMediaQuery,
     useTheme,
+    FormHelperText,
+    FormControl,
+    InputLabel,
 } from '@mui/material';
+import { Controller } from 'react-hook-form';
 import { TransitionProps } from '@mui/material/transitions';
-import dayjs from 'dayjs';
+import { useUpdateReservationViewModel } from '../viewModels/useUpdateReserVationViewModel';
 import { ReservationData } from '../services/reservationService';
 
 const Transition = React.forwardRef(function Transition(
@@ -36,16 +42,15 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    if (!reservation) return null;
 
-    const handleSave = () => {
-        handleToast('Reservation saved successfully', 'success');
-        onClose();
-    };
-    const handleClose = () => {
-        handleToast('Reservation cancelled', 'error');
-        onClose();
-    };
+    const { control, handleSubmit, errors, onSubmit } =
+        useUpdateReservationViewModel({
+            reservation,
+            handleToast,
+            onClose,
+        });
+
+    if (!reservation) return null;
 
     return (
         <Dialog
@@ -61,53 +66,218 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                     maxWidth: isMobile ? '100%' : '600px',
                     margin: isMobile ? 0 : 'auto',
                     borderRadius: isMobile ? 0 : 3,
-                    background:
-                        'linear-gradient(108deg, rgba(253,187,45,1) 0%, rgba(253,187,45,1) 0%, rgba(34,132,195,1) 100%, rgba(0,0,0,1) 100%)',
                 },
             }}
         >
-            <DialogTitle>Reservation Details</DialogTitle>
-            <DialogContent dividers>
-                <Typography variant='body1'>
-                    <strong>Full name:</strong> {reservation.firstName}{' '}
-                    {reservation.lastName}
-                </Typography>
-                <Typography variant='body1'>
-                    <strong>Document Type:</strong> {reservation.documentType}
-                </Typography>
-                <Typography variant='body1'>
-                    <strong>Document Number:</strong>{' '}
-                    {reservation.documentNumber}
-                </Typography>
-                <Typography variant='body1'>
-                    <strong>Email:</strong> {reservation.email}
-                </Typography>
-                <Typography variant='body1'>
-                    <strong>Reservation Date:</strong>{' '}
-                    {dayjs(reservation.reservationDate).format(
-                        'MM/DD/YYYY hh:mm A'
-                    )}
-                </Typography>
-                <Typography variant='body1'>
-                    <strong>Reservation Type:</strong>{' '}
-                    {reservation.reservationType}
-                </Typography>
-                <Typography variant='body1'>
-                    <strong>Number of People:</strong>{' '}
-                    {reservation.numberOfPeople}
-                </Typography>
-                {reservation.description && (
-                    <Typography variant='body1'>
-                        <strong>Description:</strong> {reservation.description}
-                    </Typography>
-                )}
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleSave}>Save</Button>
-                <Button onClick={handleClose} color='error'>
-                    Cancel
-                </Button>
-            </DialogActions>
+            <DialogTitle>Edit Reservation</DialogTitle>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <DialogContent dividers>
+                    <Controller
+                        name='firstName'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='First Name'
+                                fullWidth
+                                error={!!errors.firstName}
+                                helperText={errors.firstName?.message}
+                                margin='normal'
+                            />
+                        )}
+                    />
+                    <Controller
+                        name='lastName'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Last Name'
+                                fullWidth
+                                error={!!errors.lastName}
+                                helperText={errors.lastName?.message}
+                                margin='normal'
+                            />
+                        )}
+                    />
+                    <Controller
+                        name='status'
+                        control={control}
+                        render={({ field }) => (
+                            <FormControl
+                                fullWidth
+                                sx={{ marginTop: 2 }}
+                                error={!!errors.status}
+                            >
+                                <InputLabel>Status</InputLabel>
+                                <Select
+                                    {...field}
+                                    fullWidth
+                                    displayEmpty
+                                    label='Status'
+                                >
+                                    <MenuItem value='PENDING'>Pending</MenuItem>
+                                    <MenuItem value='ACCEPTED'>
+                                        Accepted
+                                    </MenuItem>
+                                    <MenuItem value='REJECTED'>
+                                        Rejected
+                                    </MenuItem>
+                                    <MenuItem value='CANCELED'>
+                                        Canceled
+                                    </MenuItem>
+                                    <MenuItem value='COMPLETED'>
+                                        Completed
+                                    </MenuItem>
+                                </Select>
+                                {!!errors.status && (
+                                    <FormHelperText>
+                                        {errors.status.message}
+                                    </FormHelperText>
+                                )}
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        name='documentType'
+                        control={control}
+                        render={({ field }) => (
+                            <FormControl
+                                fullWidth
+                                sx={{ marginTop: 2 }}
+                                error={!!errors.documentType}
+                            >
+                                <InputLabel>Document Type</InputLabel>
+                                <Select
+                                    {...field}
+                                    fullWidth
+                                    error={!!errors.documentType}
+                                    displayEmpty
+                                    label='Document Type'
+                                >
+                                    <MenuItem value='DNI'>DNI</MenuItem>
+                                    <MenuItem value='PASSPORT'>
+                                        Passport
+                                    </MenuItem>
+                                    <MenuItem value='DRIVER_LICENSE'>
+                                        Driver License
+                                    </MenuItem>
+                                </Select>
+                                {!!errors.documentType && (
+                                    <FormHelperText>
+                                        {errors.documentType.message}
+                                    </FormHelperText>
+                                )}
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        name='documentNumber'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Document Number'
+                                fullWidth
+                                error={!!errors.documentNumber}
+                                helperText={errors.documentNumber?.message}
+                                margin='normal'
+                            />
+                        )}
+                    />
+                    <Controller
+                        name='reservationType'
+                        control={control}
+                        render={({ field }) => (
+                            <FormControl
+                                fullWidth
+                                sx={{ marginTop: 2 }}
+                                error={!!errors.reservationType}
+                            >
+                                <InputLabel>Reservation Type</InputLabel>
+                                <Select
+                                    {...field}
+                                    fullWidth
+                                    error={!!errors.reservationType}
+                                    displayEmpty
+                                    label='Reservation Type'
+                                >
+                                    <MenuItem value=''>
+                                        Select Reservation Type
+                                    </MenuItem>
+                                    <MenuItem value='DINNER'>Dinner</MenuItem>
+                                    <MenuItem value='LUNCH'>Lunch</MenuItem>
+                                    <MenuItem value='BIRTHDAY'>
+                                        Birthday
+                                    </MenuItem>
+                                    <MenuItem value='SPECIAL_OCCASION'>
+                                        Special Occasion
+                                    </MenuItem>
+                                </Select>
+                                {errors.reservationType && (
+                                    <FormHelperText>
+                                        {errors.reservationType.message}
+                                    </FormHelperText>
+                                )}
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        name='reservationDate'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Reservation Date'
+                                type='datetime-local'
+                                fullWidth
+                                error={!!errors.reservationDate}
+                                helperText={
+                                    errors.reservationDate?.message || ''
+                                }
+                                margin='normal'
+                                value={field.value || ''}
+                                onChange={(e) => field.onChange(e.target.value)}
+                            />
+                        )}
+                    />
+                    <Controller
+                        name='numberOfPeople'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Number of People'
+                                type='number'
+                                fullWidth
+                                error={!!errors.numberOfPeople}
+                                helperText={errors.numberOfPeople?.message}
+                                margin='normal'
+                            />
+                        )}
+                    />
+                    <Controller
+                        name='description'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Description'
+                                fullWidth
+                                multiline
+                                rows={4}
+                                margin='normal'
+                            />
+                        )}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={onClose} color='error'>
+                        Cancel
+                    </Button>
+                    <Button type='submit'>Save</Button>
+                </DialogActions>
+            </form>
         </Dialog>
     );
 };
