@@ -47,7 +47,7 @@ export class ReservationService {
   /**
    * Actualizar una reserva existente en la base de datos.
    * @param id ID de la reserva a actualizar.
-   * @param data Datos a actualizar (reservationDate, reservationType, numberOfPeople, description).
+   * @param data Datos a actualizar (reservationDate, reservationType, numberOfPeople, description, firstName, lastName, email, documentType, documentNumber, status).
    * @returns La reserva actualizada.
    */
   async updateReservation(

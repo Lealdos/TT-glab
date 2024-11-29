@@ -73,6 +73,11 @@ export class ReservationController {
       numberOfPeople?: number;
       description?: string;
       status?: Status;
+      firstName?: string;
+      lastName?: string;
+      email?: string;
+      documentType?: string;
+      documentNumber?: string;
     },
   ): Promise<Reservation> {
     return this.reservationService.updateReservation(id, {
@@ -82,6 +87,12 @@ export class ReservationController {
       reservationType: updateData.reservationType,
       numberOfPeople: updateData.numberOfPeople,
       description: updateData.description,
+      firstName: updateData.firstName,
+      lastName: updateData.lastName,
+      email: updateData.email,
+      documentType: updateData.documentType,
+      documentNumber: updateData.documentNumber,
+      status: updateData.status,
     });
   }
 
