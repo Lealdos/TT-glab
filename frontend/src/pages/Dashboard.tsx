@@ -43,7 +43,7 @@ export const Dashboard: React.FC = () => {
             setReservations(ReservationData);
         };
         fetchReservations();
-    }, []);
+    }, [reservations]);
 
     const handleToast = (
         message: string,
