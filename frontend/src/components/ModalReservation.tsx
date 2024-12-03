@@ -17,8 +17,13 @@ import {
 } from '@mui/material';
 import { Controller } from 'react-hook-form';
 import { TransitionProps } from '@mui/material/transitions';
-import { useUpdateReservationViewModel } from '../viewModels/useUpdateReserVationViewModel';
+import { useReservationForm } from '../viewModels/useUpdateReserVationViewModel';
 import { ReservationData } from '../services/reservationService';
+import {
+    StatusSchema,
+    DocumentTypeSchema,
+    ReservationTypeSchema,
+} from '../utils/ValidationSchema';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & { children: React.ReactElement },
@@ -30,7 +35,7 @@ const Transition = React.forwardRef(function Transition(
 type ReservationModalProps = {
     open: boolean;
     onClose: () => void;
-    reservation: ReservationData | null;
+    reservation: ReservationData;
     handleToast: (message: string, type: 'success' | 'error') => void;
 };
 
@@ -42,13 +47,28 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const statusOptions = StatusSchema.options.map((value) => ({
+        value,
+        label: value.charAt(0).toUpperCase() + value.slice(1).toLowerCase(),
+    }));
 
-    const { control, handleSubmit, errors, onSubmit } =
-        useUpdateReservationViewModel({
-            reservation,
-            handleToast,
-            onClose,
-        });
+    const documentTypeOptions = DocumentTypeSchema.options.map((value) => ({
+        value,
+        label: value,
+    }));
+
+    const reservationTypeOptions = ReservationTypeSchema.options.map(
+        (value) => ({
+            value,
+            label: value,
+        })
+    );
+
+    const { control, handleSubmit, errors, onSubmit } = useReservationForm({
+        reservation,
+        handleToast,
+        onClose,
+    });
 
     if (!reservation) return null;
 
@@ -116,19 +136,14 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                                     displayEmpty
                                     label='Status'
                                 >
-                                    <MenuItem value='PENDING'>Pending</MenuItem>
-                                    <MenuItem value='ACCEPTED'>
-                                        Accepted
-                                    </MenuItem>
-                                    <MenuItem value='REJECTED'>
-                                        Rejected
-                                    </MenuItem>
-                                    <MenuItem value='CANCELED'>
-                                        Canceled
-                                    </MenuItem>
-                                    <MenuItem value='COMPLETED'>
-                                        Completed
-                                    </MenuItem>
+                                    {statusOptions.map((option) => (
+                                        <MenuItem
+                                            key={option.value}
+                                            value={option.value}
+                                        >
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                                 {!!errors.status && (
                                     <FormHelperText>
@@ -136,6 +151,26 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                                     </FormHelperText>
                                 )}
                             </FormControl>
+                        )}
+                    />
+
+                    <Controller
+                        name='reservationDate'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Reservation Date'
+                                type='datetime-local'
+                                fullWidth
+                                error={!!errors.reservationDate}
+                                helperText={
+                                    errors.reservationDate?.message || ''
+                                }
+                                margin='normal'
+                                value={field.value || ''}
+                                onChange={(e) => field.onChange(e.target.value)}
+                            />
                         )}
                     />
                     <Controller
@@ -155,13 +190,14 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                                     displayEmpty
                                     label='Document Type'
                                 >
-                                    <MenuItem value='DNI'>DNI</MenuItem>
-                                    <MenuItem value='PASSPORT'>
-                                        Passport
-                                    </MenuItem>
-                                    <MenuItem value='DRIVER_LICENSE'>
-                                        Driver License
-                                    </MenuItem>
+                                    {documentTypeOptions.map((option) => (
+                                        <MenuItem
+                                            key={option.value}
+                                            value={option.value}
+                                        >
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                                 {!!errors.documentType && (
                                     <FormHelperText>
@@ -202,17 +238,14 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                                     displayEmpty
                                     label='Reservation Type'
                                 >
-                                    <MenuItem value=''>
-                                        Select Reservation Type
-                                    </MenuItem>
-                                    <MenuItem value='DINNER'>Dinner</MenuItem>
-                                    <MenuItem value='LUNCH'>Lunch</MenuItem>
-                                    <MenuItem value='BIRTHDAY'>
-                                        Birthday
-                                    </MenuItem>
-                                    <MenuItem value='SPECIAL_OCCASION'>
-                                        Special Occasion
-                                    </MenuItem>
+                                    {reservationTypeOptions.map((option) => (
+                                        <MenuItem
+                                            key={option.value}
+                                            value={option.value}
+                                        >
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                                 {errors.reservationType && (
                                     <FormHelperText>
@@ -222,25 +255,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                             </FormControl>
                         )}
                     />
-                    <Controller
-                        name='reservationDate'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='Reservation Date'
-                                type='datetime-local'
-                                fullWidth
-                                error={!!errors.reservationDate}
-                                helperText={
-                                    errors.reservationDate?.message || ''
-                                }
-                                margin='normal'
-                                value={field.value || ''}
-                                onChange={(e) => field.onChange(e.target.value)}
-                            />
-                        )}
-                    />
+
                     <Controller
                         name='numberOfPeople'
                         control={control}
