@@ -104,16 +104,17 @@ async function main() {
         lastName: reservation.lastName,
         documentType: reservation.documentType as
           | 'DNI'
-          | 'PASSPORT'
-          | 'DRIVER_LICENSE',
+          | 'Passport'
+          | 'Driver License',
         documentNumber: reservation.documentNumber,
         email: reservation.email,
         reservationDate: new Date(reservation.reservationDate),
         reservationType: reservation.reservationType as
-          | 'DINNER'
-          | 'LUNCH'
-          | 'BIRTHDAY'
-          | 'SPECIAL_OCCASION',
+          | 'Dinner'
+          | 'Lunch'
+          | 'Birthday'
+          | 'Special Occasion'
+          | 'Dinner parties',
         numberOfPeople: parseInt(reservation.numberOfPeople, 10),
         description: reservation.description,
       },
