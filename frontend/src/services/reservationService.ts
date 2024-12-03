@@ -1,26 +1,27 @@
 import axios, { AxiosResponse } from 'axios';
+import { z } from 'zod';
+import {
+    StatusSchema,
+    DocumentTypeSchema,
+    ReservationTypeSchema,
+} from '../utils/ValidationSchema';
+
 const API_URL =
     import.meta.env.VITE_REACT_APP_API_URL || 'http://localhost:3000';
 
-export interface ReservationData {
+export type ReservationData = {
     id?: string;
-    status?: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELED' | 'COMPLETED';
+    status: z.infer<typeof StatusSchema>;
     firstName: string;
     lastName: string;
-    documentType: 'DNI' | 'Passport' | 'Driver License';
+    documentType: z.infer<typeof DocumentTypeSchema>;
     documentNumber: string;
     email: string;
     reservationDate: string;
-    reservationType:
-        | 'Dinner'
-        | 'Lunch'
-        | 'Birthday'
-        | 'Special Occasion'
-        | 'dinner parties';
+    reservationType: z.infer<typeof ReservationTypeSchema>;
     numberOfPeople: number;
     description?: string;
-}
-
+};
 interface ReservationUpdateData {
     reservationDate?: string;
     reservationType?: string;
