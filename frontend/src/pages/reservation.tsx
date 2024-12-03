@@ -13,8 +13,9 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import { Controller } from 'react-hook-form';
 
 import { useReservationViewModel } from '../viewModels/useReservationViewModel';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { Layout } from '../components/Layout';
+import { toast } from 'react-toastify';
 
 export const Reservation: React.FC = () => {
     const { register, handleSubmit, errors, submitError, onSubmit, control } =
@@ -40,6 +41,7 @@ export const Reservation: React.FC = () => {
                         {submitError}
                     </Typography>
                 )}
+
                 <Container
                     component='form'
                     onSubmit={handleSubmit(onSubmit)}
@@ -111,16 +113,21 @@ export const Reservation: React.FC = () => {
                         <Controller
                             control={control}
                             name='reservationDate'
-                            defaultValue={undefined}
+                            defaultValue={dayjs().add(1, 'hour')}
                             render={({ field }) => (
                                 <MobileDateTimePicker
                                     {...field}
                                     label='Reservation Date'
                                     value={field.value || null}
                                     views={['year', 'day', 'hours', 'minutes']}
-                                    onChange={(date: Dayjs | null) =>
-                                        field.onChange(date)
-                                    }
+                                    onChange={(date: Dayjs | null) => {
+                                        console.log(date);
+                                        if (!date)
+                                            return toast(
+                                                'Please select a date'
+                                            );
+                                        return field.onChange(date);
+                                    }}
                                     slotProps={{
                                         textField: {
                                             error: !!errors.reservationDate,
@@ -163,6 +170,7 @@ export const Reservation: React.FC = () => {
                         {...register('numberOfPeople', { valueAsNumber: true })}
                         error={!!errors.numberOfPeople}
                         helperText={errors.numberOfPeople?.message}
+                        defaultValue={1}
                     />
                     <TextField
                         label='Description / Observations'
