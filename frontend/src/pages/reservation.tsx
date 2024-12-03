@@ -15,7 +15,6 @@ import { Controller } from 'react-hook-form';
 import { useReservationViewModel } from '../viewModels/useReservationViewModel';
 import dayjs, { Dayjs } from 'dayjs';
 import { Layout } from '../components/Layout';
-import { toast } from 'react-toastify';
 
 export const Reservation: React.FC = () => {
     const { register, handleSubmit, errors, submitError, onSubmit, control } =
@@ -121,11 +120,6 @@ export const Reservation: React.FC = () => {
                                     value={field.value || null}
                                     views={['year', 'day', 'hours', 'minutes']}
                                     onChange={(date: Dayjs | null) => {
-                                        console.log(date);
-                                        if (!date)
-                                            return toast(
-                                                'Please select a date'
-                                            );
                                         return field.onChange(date);
                                     }}
                                     slotProps={{
