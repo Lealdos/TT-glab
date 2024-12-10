@@ -18,6 +18,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 height: '100vh',
                 gap: 2,
             }}
+            maxWidth={false}
         >
             <NavBar />
             {children}
