@@ -73,23 +73,27 @@ export const Login: React.FC = () => {
                         {...register('password')}
                         error={!!errors.password}
                         helperText={errors.password?.message}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position='end'>
-                                    <IconButton
-                                        onClick={() =>
-                                            setPasswordVisible(!passwordVisible)
-                                        }
-                                        edge='end'
-                                    >
-                                        {passwordVisible ? (
-                                            <Visibility />
-                                        ) : (
-                                            <VisibilityOff />
-                                        )}
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
+                        slotProps={{
+                            input: {
+                                endAdornment: (
+                                    <InputAdornment position='end'>
+                                        <IconButton
+                                            onClick={() =>
+                                                setPasswordVisible(
+                                                    !passwordVisible
+                                                )
+                                            }
+                                            edge='end'
+                                        >
+                                            {passwordVisible ? (
+                                                <Visibility />
+                                            ) : (
+                                                <VisibilityOff />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            },
                         }}
                     />
                     <Button
