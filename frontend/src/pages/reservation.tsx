@@ -31,6 +31,7 @@ export const Reservation: React.FC = () => {
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
                     padding: 2,
                 }}
+                maxWidth='md'
             >
                 <Typography variant='h4' component='h1' gutterBottom>
                     Create a Reservation

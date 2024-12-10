@@ -42,6 +42,7 @@ export const Login: React.FC = () => {
                     margin: 'auto',
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
                 }}
+                maxWidth='sm'
             >
                 <Typography variant='h4' component='h1' gutterBottom>
                     Login
