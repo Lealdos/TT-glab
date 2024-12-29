@@ -128,12 +128,14 @@ export const Dashboard: React.FC = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <ReservationModal
-                    open={openModal}
-                    onClose={handleCloseModal}
-                    reservation={selectedReservation}
-                    handleToast={handleToast}
-                />
+                {selectedReservation && (
+                    <ReservationModal
+                        open={openModal}
+                        onClose={handleCloseModal}
+                        reservation={selectedReservation}
+                        handleToast={handleToast}
+                    />
+                )}
             </Container>
         </Layout>
     );
