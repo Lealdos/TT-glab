@@ -18,4 +18,11 @@ export const theme = createTheme({
             fontSize: '1rem',
         },
     },
+    components: {
+        MuiContainer: {
+            defaultProps: {
+                maxWidth: false,
+            },
+        },
+    },
 });
