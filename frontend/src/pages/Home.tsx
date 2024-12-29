@@ -19,7 +19,9 @@ export const Home: React.FC = () => {
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
                     gap: 2,
                     padding: 2,
+                    textAlign: 'center',
                 }}
+                maxWidth='md'
             >
                 <Typography variant='h1' component='h1' gutterBottom>
                     Restaurant Reservation
