@@ -7,22 +7,54 @@ import {
     IconButton,
     InputAdornment,
 } from '@mui/material';
-import { useLoginViewModel } from '../viewModels/useLoginViewModel';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useAuthContext } from '../components/context/AuthContext';
-import { Navigate } from 'react-router-dom';
+
 import { Layout } from '../components/Layout';
 
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginService } from '../services/AuthService';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useAuthContext } from '../components/context/AuthContext';
+
+const loginSchema = z.object({
+    email: z.string().email('Invalid email address'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
+type LoginFormInputs = z.infer<typeof loginSchema>;
+
 export const Login: React.FC = () => {
-    const { isAuthenticated } = useAuthContext();
-
-    const { register, handleSubmit, errors, authError, onSubmit } =
-        useLoginViewModel();
-
+    const { isAuthenticated, setIsAuthenticated } = useAuthContext();
     const [passwordVisible, setPasswordVisible] = useState(false);
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<LoginFormInputs>({
+        resolver: zodResolver(loginSchema),
+    });
+    const [authError, setAuthError] = useState<string | null>(null);
+    const navigate = useNavigate();
+
     if (isAuthenticated) {
         return <Navigate to='/dashboard' />;
     }
+
+    const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+        try {
+            const token = await loginService(data);
+            sessionStorage.setItem('authToken', token.access_token);
+            setAuthError(null);
+            setIsAuthenticated(true);
+            navigate('/admin/dashboard');
+        } catch (error: unknown) {
+            console.error(error);
+            setAuthError('Invalid email or password');
+        }
+    };
 
     return (
         <Layout>
