@@ -47,7 +47,6 @@ export const Login: React.FC = () => {
         try {
             const token = await loginService(data);
             sessionStorage.setItem('authToken', token.access_token);
-            setAuthError(null);
             setIsAuthenticated(true);
             navigate('/admin/dashboard');
         } catch (error: unknown) {
