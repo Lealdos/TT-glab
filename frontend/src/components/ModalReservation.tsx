@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import { Controller } from 'react-hook-form';
 import { TransitionProps } from '@mui/material/transitions';
-import { useReservationForm } from '../viewModels/useUpdateReserVationViewModel';
+import { useReservationForm } from '../hooks/useUpdateReservationForm';
 import { ReservationData } from '../services/reservationService';
 import {
     StatusSchema,
@@ -45,8 +45,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
     reservation,
     handleToast,
 }) => {
+    
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    
     const statusOptions = StatusSchema.options.map((value) => ({
         value,
         label: value.charAt(0).toUpperCase() + value.slice(1).toLowerCase(),
@@ -165,7 +167,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                                 fullWidth
                                 error={!!errors.reservationDate}
                                 helperText={
-                                    errors.reservationDate?.message || ''
+                                    errors.reservationDate?.message ?? ''
                                 }
                                 margin='normal'
                                 value={field.value || ''}
