@@ -1,17 +1,14 @@
-import {axiosInstance} from './axiosConfig';
+import { axiosInstance } from './axiosConfig';
 interface LoginData {
     email: string;
     password: string;
 }
 
 export const loginService = async (loginData: LoginData) => {
-    const { data: token } = await axiosInstance.post(
-        '/auth/login',
-        loginData
-    );
+    const { data: token } = await axiosInstance.post('/auth/login', loginData);
     return token;
 };
 
 export const logoutService = () => {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('authToken');
 };
