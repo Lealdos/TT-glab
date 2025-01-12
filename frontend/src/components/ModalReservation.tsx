@@ -45,10 +45,9 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
     reservation,
     handleToast,
 }) => {
-    
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    
+
     const statusOptions = StatusSchema.options.map((value) => ({
         value,
         label: value.charAt(0).toUpperCase() + value.slice(1).toLowerCase(),
@@ -118,6 +117,20 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                                 fullWidth
                                 error={!!errors.lastName}
                                 helperText={errors.lastName?.message}
+                                margin='normal'
+                            />
+                        )}
+                    />
+                    <Controller
+                        name='email'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Email'
+                                fullWidth
+                                error={!!errors.email}
+                                helperText={errors.email?.message}
                                 margin='normal'
                             />
                         )}
