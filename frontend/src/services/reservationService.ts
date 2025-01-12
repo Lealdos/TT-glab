@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
+import {axiosInstance} from './axiosConfig';
 import { z } from 'zod';
 import {
     StatusSchema,
@@ -6,8 +7,7 @@ import {
     ReservationTypeSchema,
 } from '../utils/ValidationSchema';
 
-const API_URL =
-    import.meta.env.VITE_REACT_APP_API_URL || 'http://localhost:3000';
+
 
 export type ReservationData = {
     id?: string;
@@ -22,6 +22,7 @@ export type ReservationData = {
     numberOfPeople: number;
     description?: string;
 };
+
 interface ReservationUpdateData {
     reservationDate?: string;
     reservationType?: string;
@@ -31,15 +32,15 @@ interface ReservationUpdateData {
 }
 
 export const createReservationService = async (data: ReservationData) => {
-    return axios.post(`${API_URL}/reservations`, data);
+    return axiosInstance.post(`/reservations`, data);
 };
 
 export const getAllReservationsService = async (): Promise<
     ReservationData[]
 > => {
     try {
-        const response: AxiosResponse<ReservationData[]> = await axios.get(
-            `${API_URL}/reservations`
+        const response: AxiosResponse<ReservationData[]> = await axiosInstance.get(
+            `/reservations`
         );
         return response.data;
     } catch (error: unknown) {
@@ -49,7 +50,7 @@ export const getAllReservationsService = async (): Promise<
 };
 
 export const getReservationByIdService = async (id: string) => {
-    return axios.get(`${API_URL}/reservations/${id}`);
+    return axiosInstance.get(`/reservations/${id}`);
 };
 
 export const updateReservationService = async (
@@ -57,9 +58,9 @@ export const updateReservationService = async (
     data: ReservationUpdateData
 ) => {
     console.log('updateReservationService', id, data);
-    return axios.put(`${API_URL}/reservations/${id}/update`, data);
+    return axiosInstance.put(`/reservations/${id}/update`, data);
 };
 
 export const deleteReservationService = async (id: string) => {
-    return axios.delete(`${API_URL}/reservations/${id}`);
+    return axiosInstance.delete(`/reservations/${id}`);
 };

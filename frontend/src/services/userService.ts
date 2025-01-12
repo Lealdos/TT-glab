@@ -1,7 +1,7 @@
-import axios from 'axios';
+import {axiosInstance} from './axiosConfig';
 
-const API_URL =
-    import.meta.env.VITE_REACT_APP_API_URL || 'http://localhost:3000';
+
+
 interface RegisterUserData {
     firstName: string;
     lastName: string;
@@ -11,5 +11,5 @@ interface RegisterUserData {
 }
 
 export const registerUserService = async (data: RegisterUserData) => {
-    return axios.post(`${API_URL}/users/register`, data);
+    return axiosInstance.post(`/users/register`, data);
 };
