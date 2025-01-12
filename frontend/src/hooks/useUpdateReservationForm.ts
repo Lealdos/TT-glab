@@ -37,15 +37,15 @@ type UpdateFormReservationProps = {
 };
 
 const DEFAULT_RESERVATION: ReservationFormValues = {
-    status: 'PENDING',
-    documentType: 'DNI',
-    reservationType: 'Dinner',
     firstName: '',
-    email: '',
-    documentNumber: '',
     lastName: '',
-    numberOfPeople: 0,
+    status: 'PENDING',
     reservationDate: dayjs().format('YYYY-MM-DDTHH:mm A'),
+    documentType: 'DNI',
+    documentNumber: '',
+    reservationType: 'Dinner',
+    numberOfPeople: 0,
+    email: '',
 };
 
 export const useReservationForm = ({
