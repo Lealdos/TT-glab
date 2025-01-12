@@ -79,7 +79,7 @@ export const NavBar: React.FC = () => {
                             aria-label='menu'
                             onClick={handleDrawerToggle}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: { xs: 'flex', md: 'none' },
                             }}
                         >
                             <MenuIcon />
