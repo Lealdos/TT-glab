@@ -8,7 +8,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { redirect } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from './context/AuthContext';
 import { logoutService } from '../services/AuthService';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,13 +16,14 @@ import { Container } from '@mui/material';
 
 export const NavBar: React.FC = () => {
     const { isAuthenticated, setIsAuthenticated } = useAuthContext();
+    const navigate = useNavigate();
 
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const logOut = () => {
         logoutService();
         setIsAuthenticated(false);
-        redirect('/');
+        navigate('/');
     };
 
     const handleDrawerToggle = () => {
@@ -30,11 +31,11 @@ export const NavBar: React.FC = () => {
     };
 
     const menuItems = [
-        { label: 'Dashboard', onClick: () => redirect('/admin/dashboard') },
-        { label: 'Reservations', onClick: () => redirect('/reservation') },
+        { label: 'Dashboard', onClick: () => navigate('/admin/dashboard') },
+        { label: 'Reservations', onClick: () => navigate('/reservation') },
         isAuthenticated
             ? { label: 'Logout', onClick: logOut }
-            : { label: 'Login', onClick: () => redirect('/login') },
+            : { label: 'Login', onClick: () => navigate('/login') },
     ];
 
     return (
@@ -66,7 +67,7 @@ export const NavBar: React.FC = () => {
                         <Button
                             color='inherit'
                             onClick={() => {
-                                redirect('/');
+                                navigate('/');
                             }}
                         >
                             Home
@@ -94,7 +95,7 @@ export const NavBar: React.FC = () => {
                         <Button
                             color='inherit'
                             onClick={() => {
-                                redirect('/');
+                                navigate('/');
                             }}
                         >
                             Home
@@ -109,7 +110,7 @@ export const NavBar: React.FC = () => {
                         <Button
                             color='inherit'
                             onClick={() => {
-                                redirect('/admin/dashboard');
+                                navigate('/admin/dashboard');
                             }}
                         >
                             Dashboard
@@ -117,7 +118,7 @@ export const NavBar: React.FC = () => {
                         <Button
                             color='inherit'
                             onClick={() => {
-                                redirect('/reservation');
+                                navigate('/reservation');
                             }}
                         >
                             Reservations
@@ -131,7 +132,7 @@ export const NavBar: React.FC = () => {
                             <Button
                                 color='inherit'
                                 onClick={() => {
-                                    redirect('/login');
+                                    navigate('/login');
                                 }}
                             >
                                 Login
